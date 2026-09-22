@@ -10,6 +10,7 @@ import {
 
 import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/Header";
+import Botao from "../components/Botao";
 
 export default function PagamentoAberto({ setTela }) {
 
@@ -248,13 +249,7 @@ export default function PagamentoAberto({ setTela }) {
                         </View>
 
 
-                        <TouchableOpacity style={styles.botaoPagar}>
-
-                            <Text style={styles.textoBotao}>
-                                Pagar Agora
-                            </Text>
-
-                        </TouchableOpacity>
+                        <Botao texto={"Pagar agora"} />
 
                     </View>
 
@@ -509,9 +504,9 @@ const styles = StyleSheet.create({
 
 
     pequeno: {
-        fontSize: 12,
+        fontSize: 14,
         color: "#666666",
-        fontWeight: "600",
+        fontFamily: "Inter_500Regular",
     },
 
 
@@ -548,8 +543,8 @@ const styles = StyleSheet.create({
 
 
     textoAba: {
-        fontSize: 14,
-        fontWeight: "700",
+        fontSize: 18,
+        fontFamily: "Inter_700Bold",
         color: "#999999",
     },
 
@@ -628,16 +623,17 @@ const styles = StyleSheet.create({
 
 
     honorario: {
-        fontSize: 15,
-        fontWeight: "800",
+        fontSize: 18,
+        fontFamily: "Inter_700Bold",
         color: "#222222",
     },
 
 
     processo: {
-        fontSize: 12,
+        fontSize: 14,
         color: "#999999",
         marginTop: 4,
+        fontFamily: "Inter_400Regular_Italic",
     },
 
 
@@ -657,42 +653,42 @@ const styles = StyleSheet.create({
     infoTitulo: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 5,
+        gap: 10
     },
 
 
     infoTexto: {
-        fontSize: 12,
+        fontSize: 16,
         color: "#999999",
         marginBottom: 5,
     },
 
 
     infoValor: {
-        fontSize: 13,
+        fontSize: 16,
         color: "#333333",
-        textAlign: "center",
+        fontFamily: "Inter_700Bold",
     },
 
 
     valorVermelho: {
         color: "#FF4D55",
-        fontSize: 13,
-        fontWeight: "800",
+        fontSize: 16,
+        fontFamily: "Inter_700Bold",
     },
 
 
     valorAmarelo: {
         color: "#E6B000",
-        fontSize: 13,
-        fontWeight: "800",
+        fontSize: 16,
+        fontFamily: "Inter_700Bold",
     },
 
 
     valorVerde: {
         color: "#59A83B",
-        fontSize: 13,
-        fontWeight: "800",
+        fontSize: 16,
+        fontFamily: "Inter_700Bold",
     },
 
 
