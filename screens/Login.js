@@ -6,9 +6,10 @@ import {
     Text,
     TextInput,
     StyleSheet,
-    Image, ImageBackground
+    Image, ImageBackground, KeyboardAvoidingView, ScrollView
 } from "react-native";
 import Botao from "../components/Botao";
+import Input from "../components/Input";
 
 
 export default function Login({ navigation }) {
@@ -25,7 +26,12 @@ export default function Login({ navigation }) {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="height">
+            <ScrollView
+                contentContainerStyle={styles.scrollContainer}
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+            >
             <View style={styles.header}>
                 <Image
                     source={require("../assets/logoMaior.png")}
@@ -38,28 +44,9 @@ export default function Login({ navigation }) {
 
             <View style={styles.main}>
 
-                <Text style={styles.label}>
-                    CPF/CNPJ
-                </Text>
+                <Input label={"CPF/CNPJ:"} tipo={"numeric"} valor={cpfCnpj} setValor={setCpfCnpj} />
 
-                <TextInput
-                    style={styles.input}
-                    value={cpfCnpj}
-                    onChangeText={setCpfCnpj}
-                    keyboardType="numeric"
-                    autoCapitalize="none"
-                />
-
-                <Text style={styles.labelSenha}>
-                    Senha
-                </Text>
-
-                <TextInput
-                    style={styles.input}
-                    value={senha}
-                    onChangeText={setSenha}
-                    secureTextEntry={true}
-                />
+                <Input label={"Senha:"} tipo={"numeric"} valor={senha} setValor={setSenha} senha={true}/>
 
                 <View style={styles.areaBotao}>
                     <Botao
@@ -68,7 +55,8 @@ export default function Login({ navigation }) {
                     />
                 </View>
             </View>
-        </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
 
     );
 }
@@ -80,7 +68,6 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        flex: 2,
         backgroundColor: "#1E1E1E",
         paddingHorizontal: 40,
         paddingVertical: 70,
@@ -90,8 +77,12 @@ const styles = StyleSheet.create({
     },
 
     main: {
-        flex: 3,
         padding: 70,
+        gap: 15
+    },
+
+    scrollContainer: {
+        flexGrow: 1,
     },
 
     logo: {
@@ -102,10 +93,10 @@ const styles = StyleSheet.create({
     titulo: {
         paddingLeft: 10,
         color: "#FFFFFF",
-        fontSize: 45,
+        fontSize: 35,
         fontFamily: "Inter_700Bold",
         width: "80%",
-        paddingTop: 80,
+        paddingTop: 50,
         marginBottom: 10,
     },
 
@@ -113,39 +104,12 @@ const styles = StyleSheet.create({
       paddingLeft: 10,
       color: "#FFFFFF",
       fontFamily: "Inter_400Regular_Italic",
-        fontSize: 18,
-    },
-
-    label: {
-        fontSize: 17,
-        fontWeight: "bold",
-        marginBottom: 10,
-        fontFamily: "Inter_700Bold",
-    },
-
-    labelSenha: {
-        fontSize: 17,
-        fontFamily: "Inter_700Bold",
-        fontWeight: "bold",
-        marginTop: 30,
-        marginBottom: 10,
-    },
-
-    input: {
-        width: "100%",
-        height: 44,
-        backgroundColor: "#FFFFFF",
-        borderRadius: 8,
-        paddingHorizontal: 12,
         fontSize: 16,
-        color: "#000000",
-        borderColor: "#0047ab",
-        borderWidth: 1,
     },
 
     areaBotao: {
         alignItems: "center",
-        marginTop: 45,
+        marginTop: 20,
     },
 
 });

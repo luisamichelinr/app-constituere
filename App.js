@@ -40,7 +40,7 @@ function HomeTabs() {
                     right: 15,
                     bottom: 0,
 
-                    height: 90,
+                    height: 120,
 
                     backgroundColor: '#FFFFFF',
 

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         paddingVertical: 60,
     },
     main: {
-        flex: 3,
+        flex: 4,
         width: '100%',
         backgroundColor: "black",
         height: "100%",
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     texto: {
         color: "white",
         fontWeight: "bold",
-        fontSize: 45,
+        fontSize: 35,
         fontFamily: "Inter_900Black",
         maxWidth: "90%"
     },

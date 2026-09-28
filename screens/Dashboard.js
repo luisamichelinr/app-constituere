@@ -1,43 +1,52 @@
-import {StyleSheet, Text, View} from "react-native";
+import {ScrollView, StyleSheet, Text, View} from "react-native";
 import Header from "../components/Header";
 import CardDashboard from "../components/CardDashboard";
+import CardReuniao from "../components/CardReuniao";
+import CardPagamento from "../components/CardPagamento";
 
 export default function Dashboard({ navigation }) {
     return (
         <View style={styles.container}>
             <Header navigation={navigation} />
             <View style={styles.main}>
-                <View style={styles.saudacao}>
-                    <Text style={styles.ola}>Olá, </Text>
-                    <Text style={styles.nome}>Nome do Sobrenome</Text>
+                <View>
+                    <View style={styles.saudacao}>
+                        <Text style={styles.ola}>Olá, </Text>
+                        <Text style={styles.nome}>Nome do Sobrenome</Text>
+                    </View>
+                    <Text style={styles.subtitulo}>Tenha uma visão geral dos seus processos e reuniões</Text>
                 </View>
-                <View style={styles.resumo}>
-                    <Text style={styles.titulo}>Resumo</Text>
-                    <View style={styles.cards}>
+                <View style={styles.cards}>
                         <CardDashboard
                             texto={"Processos Ativos"}
                             numero={"3"}
-                            icone={require("../assets/processosAtivos.png")}
+                            icone={require("../assets/iconeProcessoAtivo.png")}
                         />
                         <CardDashboard
                             texto={"Próximas Reuniões"}
                             numero={"1"}
-                            icone={require("../assets/proximasReunioes.png")}
+                            icone={require("../assets/iconeReunioesAtivo.png")}
                         />
-                        <CardDashboard
-                            texto={"Processos"}
-                            numero={"12"}
-                            icone={require("../assets/processos.png")}
-                        />
-                        <CardDashboard
-                            texto={"Avisos"}
-                            numero={"20"}
-                            icone={require("../assets/notificacoesAmarelo.png")}
-                        />
-
-                    </View>
-
                 </View>
+                <View style={styles.resumo}>
+                    <Text style={styles.titulo}>O que você precisa saber</Text>
+                    <CardReuniao
+                        titulo={"Andamento do Processo"}
+                        dia={"03/08/2026 (Segunda-feira)"}
+                        horario={"14:30"}
+                        local={"Escritório"}
+                        status={"A confirmar"}
+                        dashboard={"Próxima Reunião"}
+                    />
+                    <CardPagamento
+                        titulo={"Pagamento do Processo"}
+                        dashboard={"Pagamento Pendente"}
+                        status={"aberto"}
+                        valor={"R$ 1.000,00"}
+                        data={"02/10/2026"}
+                    />
+                </View>
+
             </View>
         </View>
     )
@@ -48,11 +57,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     main: {
-        paddingVertical: 50,
+        paddingVertical: 20,
         paddingHorizontal: 30,
         alignItems: "flex-start",
         justifyContent: "flex-start",
-        gap: 30,
+        gap: 20,
     },
     saudacao: {
         flexDirection: "row",
@@ -68,15 +77,6 @@ const styles = StyleSheet.create({
         fontFamily: "Inter_700Bold",
         color: "#0047AB"
     },
-    resumo: {
-        width: "100%",
-        backgroundColor: '#FFFFFF',
-        borderRadius: 12,
-        padding: 16,
-        boxShadow: '5px 10px 2px 0px rgba(0, 0, 0, 0.08)',
-        flexDirection: 'column',
-        gap: 16
-    },
     titulo: {
         fontSize: 20,
         fontFamily: "Inter_800ExtraBold",
@@ -86,5 +86,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         flexWrap: "wrap",
+    },
+
+    resumo: {
+        width: "100%",
+        gap: 10
+    },
+    subtitulo: {
+        fontSize: 14,
+        fontFamily: "Inter_400Regular",
+        color: "#666666",
+        marginTop: 3,
     }
 })
