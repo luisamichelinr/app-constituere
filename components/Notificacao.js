@@ -28,8 +28,6 @@ export default function Notificacao({id, titulo, mensagem, tempo, nome, cor, cor
             </View>
 
 
-            {/* CONTEÚDO */}
-
             <View style={styles.conteudoCard}>
 
                 <View style={styles.topoCard}>
@@ -85,8 +83,6 @@ const styles = StyleSheet.create({
     },
 
 
-    /* ÍCONE */
-
     areaIcone: {
         width: 45,
         height: 45,
@@ -99,8 +95,6 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
 
-
-    /* CONTEÚDO */
 
     conteudoCard: {
         flex: 1,

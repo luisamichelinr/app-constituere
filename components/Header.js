@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
         height: 35,
         alignItems: "center",
         justifyContent: "center",
-        position: "relative", // Necessário para posicionar a bolinha vermelha por cima
     },
     botaoSair: {
         width: 35,

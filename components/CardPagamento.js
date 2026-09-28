@@ -9,7 +9,6 @@ export default function CardPagamento({ dashboard = "", status = "pago", titulo,
     const Aberto = status === "aberto";
     const Pago = status === "pagos" || status === "pago";
 
-    // Define as cores baseadas no status atual
     const corStatus = Vencido ? "#FF4D55" : Aberto ? "#E6B000" : "#59A83B";
     const fundoIcone = Vencido ? "#FFE9EA" : Aberto ? "#FFF9E6" : "#EBF6E9";
     const nomeIcone = Pago ? "checkmark-done-outline" : "document-outline";
@@ -47,7 +46,6 @@ export default function CardPagamento({ dashboard = "", status = "pago", titulo,
 
             <View style={styles.informacoes}>
 
-                {/* VENCIMENTO / CONFIRMAÇÃO */}
                 <View style={styles.blocoInformacao}>
                     <View style={styles.infoTitulo}>
                         <Ionicons
@@ -65,7 +63,6 @@ export default function CardPagamento({ dashboard = "", status = "pago", titulo,
                     </Text>
                 </View>
 
-                {/* BOTÃO OU BADGE DE CONFIRMAÇÃO */}
                 <View style={styles.blocoInformacao}>
                     {Pago ? (
                         <View style={styles.statusPago}>

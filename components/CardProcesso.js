@@ -103,7 +103,6 @@ export default function CardProcesso({id, tipo, numero, advogados, status}) {
 }
 
 const styles = StyleSheet.create({
-    /* CARD */
 
     cardProcesso: {
         width: "100%",
@@ -128,8 +127,6 @@ const styles = StyleSheet.create({
         gap: 16,
     },
 
-
-    /* TOPO */
 
     topoCard: {
         flexDirection: "row",
@@ -173,8 +170,6 @@ const styles = StyleSheet.create({
     },
 
 
-    /* INFORMAÇÕES */
-
     informacao: {
         width: "60%",
     },
@@ -212,8 +207,6 @@ const styles = StyleSheet.create({
     },
 
 
-    /* STATUS */
-
     statusArea: {
         flexDirection: "row",
         alignItems: "center",
@@ -232,7 +225,6 @@ const styles = StyleSheet.create({
     },
 
 
-    /* EM ANDAMENTO */
 
     statusAndamento: {
         backgroundColor: "#FFF6D9",
@@ -244,7 +236,6 @@ const styles = StyleSheet.create({
     },
 
 
-    /* CONCLUÍDO */
 
     statusConcluido: {
         backgroundColor: "#E9F8E4",

@@ -14,7 +14,6 @@ export default function CardReuniao({ dashboard = "", titulo, dia, horario, loca
     return (
         <TouchableOpacity style={styles.cardReuniao} onPress={acao}>
 
-            {/* TÍTULO DA REUNIÃO */}
             <View style={styles.linhaPrincipal}>
                 <View style={[styles.iconeFixo, { backgroundColor: Realizada ? "#E9F8E4" : AConfirmar ? "#FFF3E0" : "#E5F0FF" }]}>
                     <Ionicons name={iconeStatus} size={35} color={corStatus} />
@@ -26,7 +25,6 @@ export default function CardReuniao({ dashboard = "", titulo, dia, horario, loca
                 </View>
             </View>
 
-            {/* DATA, HORÁRIO E LOCAL */}
             <View style={styles.informacao}>
                 <Ionicons name="calendar-outline" size={21} color="#0757B9" />
                 <Text style={styles.textoInformacao}>{dia}</Text>
@@ -58,7 +56,6 @@ export default function CardReuniao({ dashboard = "", titulo, dia, horario, loca
     );
 }
 
-// Repare como a sua folha de estilo diminuiu drasticamente!
 const styles = StyleSheet.create({
     cardReuniao: {
         width: "100%",
