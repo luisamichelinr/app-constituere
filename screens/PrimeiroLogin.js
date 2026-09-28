@@ -12,7 +12,7 @@ import Botao from "../components/Botao";
 import Input from "../components/Input";
 
 
-export default function RedefinirSenha({ navigation }) {
+export default function PrimeiroLogin({ navigation }) {
 
     const [confirmarSenha, setconfirmarSenha] = useState("");
     const [senha, setSenha] = useState("");
@@ -37,7 +37,7 @@ export default function RedefinirSenha({ navigation }) {
                     style={styles.logo}
                     resizeMode="contain"
                 />
-                <Text style={styles.titulo}>Redefinir senha</Text>
+                <Text style={styles.titulo}>Vamos te ajudar a começar!</Text>
                 <Text style={styles.texto}>Para sua segurança, altere sua senha para uma personalizada e única</Text>
             </View>
 

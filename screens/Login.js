@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
         console.log("CPF/CNPJ:", cpfCnpj);
         console.log("Senha:", senha);
 
-        navigation.navigate("RedefinirSenha");
+        navigation.navigate("PrimeiroLogin");
 
     };
 

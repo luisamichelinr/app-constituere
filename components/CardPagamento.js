@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Botao from "./Botao";
 import React from "react";
 
-export default function CardPagamento({ dashboard = "", status = "pago", titulo, valor, data }) {
+export default function CardPagamento({ dashboard = "", status = "pago", titulo, valor, data, acao }) {
 
     const Vencido = status === "vencido";
     const Aberto = status === "aberto";
@@ -15,7 +15,7 @@ export default function CardPagamento({ dashboard = "", status = "pago", titulo,
     const nomeIcone = Pago ? "checkmark-done-outline" : "document-outline";
 
     return (
-        <TouchableOpacity style={styles.cardPagamento}>
+        <TouchableOpacity style={styles.cardPagamento} onPress={acao}>
 
             <View style={styles.topoCard}>
 

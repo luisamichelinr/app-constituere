@@ -21,13 +21,12 @@ export default function Header({ navigation }) {
 
                 <View style={styles.acoesDireita}>
 
-                    <TouchableOpacity style={styles.botaoNotificacao} activeOpacity={0.7}>
+                    <TouchableOpacity style={styles.botaoNotificacao} onPress={() => navigation.navigate("Notificacoes")}>
                         <Ionicons
                             name="notifications-outline"
                             size={35}
                             color="white"
                         />
-                        <View style={styles.badgeNotificacao} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -77,15 +76,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         position: "relative", // Necessário para posicionar a bolinha vermelha por cima
-    },
-    badgeNotificacao: {
-        position: "absolute",
-        top: 4,
-        right: 4,
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: "#0047AB",
     },
     botaoSair: {
         width: 35,

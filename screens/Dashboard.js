@@ -26,6 +26,7 @@ export default function Dashboard({ navigation }) {
                             texto={"Próximas Reuniões"}
                             numero={"1"}
                             icone={require("../assets/iconeReunioesAtivo.png")}
+                            acao={() => navigation.navigate("Reunioes")}
                         />
                 </View>
                 <View style={styles.resumo}>
@@ -37,6 +38,7 @@ export default function Dashboard({ navigation }) {
                         local={"Escritório"}
                         status={"A confirmar"}
                         dashboard={"Próxima Reunião"}
+                        acao={() => navigation.navigate("Reunioes")}
                     />
                     <CardPagamento
                         titulo={"Pagamento do Processo"}
@@ -44,6 +46,7 @@ export default function Dashboard({ navigation }) {
                         status={"aberto"}
                         valor={"R$ 1.000,00"}
                         data={"02/10/2026"}
+                        acao={() => navigation.navigate("Pagamentos")}
                     />
                 </View>
 

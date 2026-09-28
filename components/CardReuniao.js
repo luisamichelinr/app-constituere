@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 
-export default function CardReuniao({ dashboard = "", titulo, dia, horario, local, status }) {
+export default function CardReuniao({ dashboard = "", titulo, dia, horario, local, status, acao }) {
 
     const Realizada = status === "Realizada";
     const AConfirmar = status === "A confirmar";
@@ -12,7 +12,7 @@ export default function CardReuniao({ dashboard = "", titulo, dia, horario, loca
     const iconeStatus = Realizada ? "checkmark-circle-outline" : AConfirmar ? "help-circle-outline" : "time-outline";
 
     return (
-        <TouchableOpacity style={styles.cardReuniao}>
+        <TouchableOpacity style={styles.cardReuniao} onPress={acao}>
 
             {/* TÍTULO DA REUNIÃO */}
             <View style={styles.linhaPrincipal}>

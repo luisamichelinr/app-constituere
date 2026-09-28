@@ -1,25 +1,34 @@
 {
   "expo": {
-    "name": "constituere",
+    "name": "Constituere",
     "slug": "constituere",
     "version": "1.0.0",
+
     "orientation": "portrait",
-    "icon": "./assets/logoMenor.png",
+
+    "icon": "./assets/iconeApp.png",
+
     "userInterfaceStyle": "light",
+
+    "backgroundColor": "#FFFFFF",
+    "primaryColor": "#0047AB",
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/iconeApp.png",
+        "backgroundColor": "#EEF5FF",
+        "monochromeImage": "./assets/iconeApp.png"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "plugins": [
       "expo-font"
     ]
