@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/Header";
 import Botao from "../components/Botao";
 import CardValores from "../components/CardValores";
+import CardPagamento from "../components/CardPagamento";
 
 export default function PagamentoAberto({ navigation }) {
 
@@ -40,16 +41,34 @@ export default function PagamentoAberto({ navigation }) {
 
 
                 <ScrollView horizontal={true} contentContainerStyle={styles.resumo}>
-                     <CardValores valor={"1.000,00"} titulo={"Em aberto"} />
-                        <CardValores valor={"1.000"} titulo={"Em aberto"} />
-                        <CardValores valor={"1.000"} titulo={"Em aberto"} />
+                    <CardValores valor={"700,00"} titulo={"Vencido"} />
+                    <CardValores valor={"1.000,00"} titulo={"Em aberto"} />
+                    <CardValores valor={"200,00"} titulo={"Pago"} />
 
 
                 </ScrollView>
 
 
-                {/* ABAS */}
                 <View style={styles.abas}>
+
+                    <TouchableOpacity
+                        style={styles.aba}
+                        onPress={() => setFiltro("vencido")}
+                    >
+                        <Text
+                            style={[
+                                styles.textoAba,
+                                filtro === "vencido" && styles.abaAtiva
+                            ]}
+                        >
+                            Vencido
+                        </Text>
+
+                        {filtro === "vencido" && (
+                            <View style={styles.linhaAtiva} />
+                        )}
+                    </TouchableOpacity>
+
 
                     <TouchableOpacity
                         style={styles.aba}
@@ -61,29 +80,10 @@ export default function PagamentoAberto({ navigation }) {
                                 filtro === "aberto" && styles.abaAtiva
                             ]}
                         >
-                            Em Aberto
-                        </Text>
-
-                        {filtro === "aberto" && (
-                            <View style={styles.linhaAtiva} />
-                        )}
-                    </TouchableOpacity>
-
-
-                    <TouchableOpacity
-                        style={styles.aba}
-                        onPress={() => setFiltro("vencer")}
-                    >
-                        <Text
-                            style={[
-                                styles.textoAba,
-                                filtro === "vencer" && styles.abaAtiva
-                            ]}
-                        >
                             A Vencer
                         </Text>
 
-                        {filtro === "vencer" && (
+                        {filtro === "aberto" && (
                             <View style={styles.linhaAtiva} />
                         )}
                     </TouchableOpacity>
@@ -110,193 +110,22 @@ export default function PagamentoAberto({ navigation }) {
                 </View>
 
 
-                {/* EM ABERTO */}
-                {filtro === "aberto" && (
-                    <View style={styles.cardPagamento}>
-
-                        <View style={styles.topoCard}>
-
-                            <View style={styles.iconeDocumentoVermelho}>
-                                <Ionicons
-                                    name="document-outline"
-                                    size={28}
-                                    color="#FF4D55"
-                                />
-                            </View>
-
-                            <View style={styles.infoProcesso}>
-                                <Text style={styles.honorario}>
-                                    Honorário
-                                </Text>
-
-                                <Text style={styles.processo}>
-                                    Processo Nº 0000001
-                                </Text>
-                            </View>
-
-                        </View>
-
-
-                        <View style={styles.informacoes}>
-
-                            <View style={styles.blocoInformacao}>
-
-                                <View style={styles.infoTitulo}>
-                                    <Ionicons
-                                        name="calendar-outline"
-                                        size={19}
-                                        color="#0047AB"
-                                    />
-
-                                    <Text style={styles.infoTexto}>
-                                        Vencimento
-                                    </Text>
-                                </View>
-
-                                <Text style={styles.infoValor}>
-                                    02/08/2026
-                                </Text>
-                            </View>
-
-
-                            <View style={styles.blocoInformacao}>
-                                <Text style={styles.infoTexto}>
-                                    Valor
-                                </Text>
-
-                                <Text style={styles.valorVermelho}>
-                                    R$ 1.000,00
-                                </Text>
-                            </View>
-
-                        </View>
-
-                        <Botao texto={"Pagar agora"} />
-
-                    </View>
+                {filtro === "vencido" && (
+                    <CardPagamento titulo={"Honorário"} valor={"800,00"} status={"vencido"} data={"01/09/2026"}/>
                 )}
 
 
                 {/* A VENCER */}
-                {filtro === "vencer" && (
-                    <View style={styles.cardPagamento}>
+                {filtro === "aberto" && (
+                    <CardPagamento titulo={"Pró-labore"} valor={"300,00"} status={"aberto"} data={"01/10/2026"}/>
 
-                        <View style={styles.topoCard}>
-
-                            <View style={styles.iconeDocumentoAmarelo}>
-                                <Ionicons
-                                    name="document-outline"
-                                    size={28}
-                                    color="#E6B000"
-                                />
-                            </View>
-
-                            <View style={styles.infoProcesso}>
-                                <Text style={styles.honorario}>
-                                    Honorário
-                                </Text>
-
-                                <Text style={styles.processo}>
-                                    Processo Nº 0000001
-                                </Text>
-                            </View>
-
-                        </View>
-
-
-                        <View style={styles.informacoes}>
-
-                            <View style={styles.blocoInformacao}>
-
-                                <View style={styles.infoTitulo}>
-                                    <Ionicons
-                                        name="calendar-outline"
-                                        size={19}
-                                        color="#0047AB"
-                                    />
-
-                                    <Text style={styles.infoTexto}>
-                                        Vencimento
-                                    </Text>
-                                </View>
-
-                                <Text style={styles.infoValor}>
-                                    02/08/2026
-                                </Text>
-                            </View>
-
-
-                            <View style={styles.blocoInformacao}>
-                                <Text style={styles.infoTexto}>
-                                    Valor
-                                </Text>
-
-                                <Text style={styles.valorAmarelo}>
-                                    R$ 1.000,00
-                                </Text>
-                            </View>
-
-                        </View>
-
-                        <Botao texto={"Pagar agora"} />
-
-                    </View>
                 )}
 
 
                 {/* PAGOS */}
                 {filtro === "pagos" && (
-                    <View style={styles.cardPagamento}>
+                    <CardPagamento titulo={"Entrada"} valor={"1.000,00"} status={"pago"} data={"01/07/2026"}/>
 
-                        <View style={styles.topoCard}>
-
-                            <View style={styles.iconeDocumentoVerde}>
-                                <Ionicons
-                                    name="document-outline"
-                                    size={28}
-                                    color="#59A83B"
-                                />
-                            </View>
-
-                            <View style={styles.infoProcesso}>
-                                <Text style={styles.honorario}>
-                                    Honorário
-                                </Text>
-
-                                <Text style={styles.processo}>
-                                    Processo Nº 0000001
-                                </Text>
-                            </View>
-
-                        </View>
-
-
-                        <View style={styles.informacoes}>
-
-                            <View style={styles.blocoInformacao}>
-                                <Text style={styles.infoTexto}>
-                                    Forma de pagamento
-                                </Text>
-
-                                <Text style={styles.infoValor}>
-                                    Pix
-                                </Text>
-                            </View>
-
-
-                            <View style={styles.blocoInformacao}>
-                                <Text style={styles.infoTexto}>
-                                    Valor
-                                </Text>
-
-                                <Text style={styles.valorVerde}>
-                                    R$ 1.000,00
-                                </Text>
-                            </View>
-
-                        </View>
-
-                    </View>
                 )}
 
             </ScrollView>

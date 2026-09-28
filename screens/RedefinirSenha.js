@@ -12,16 +12,15 @@ import Botao from "../components/Botao";
 import Input from "../components/Input";
 
 
-export default function Login({ navigation }) {
+export default function RedefinirSenha({ navigation }) {
 
-    const [cpfCnpj, setCpfCnpj] = useState("");
+    const [confirmarSenha, setconfirmarSenha] = useState("");
     const [senha, setSenha] = useState("");
 
     const entrar = () => {
-        console.log("CPF/CNPJ:", cpfCnpj);
         console.log("Senha:", senha);
 
-        navigation.navigate("RedefinirSenha");
+        navigation.navigate("Dashboard");
 
     };
 
@@ -38,19 +37,19 @@ export default function Login({ navigation }) {
                     style={styles.logo}
                     resizeMode="contain"
                 />
-                <Text style={styles.titulo}>Entre na sua conta!</Text>
-                <Text style={styles.texto}>Consulte seu login e senha com seu advogado</Text>
+                <Text style={styles.titulo}>Vamos te ajudar a começar!</Text>
+                <Text style={styles.texto}>Para sua segurança, altere sua senha para uma personalizada</Text>
             </View>
 
             <View style={styles.main}>
 
-                <Input label={"CPF/CNPJ:"} tipo={"numeric"} valor={cpfCnpj} setValor={setCpfCnpj} />
-
                 <Input label={"Senha:"} tipo={"numeric"} valor={senha} setValor={setSenha} senha={true}/>
+
+                <Input label={"Confirmar senha:"} tipo={"numeric"} valor={confirmarSenha} setValor={setconfirmarSenha} senha={true}/>
 
                 <View style={styles.areaBotao}>
                     <Botao
-                        texto="Entrar"
+                        texto="Redefinir sua senha"
                         acao={entrar}
                     />
                 </View>
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         fontSize: 35,
         fontFamily: "Inter_700Bold",
-        width: "80%",
+        width: "90%",
         paddingTop: 50,
         marginBottom: 10,
     },
@@ -105,6 +104,7 @@ const styles = StyleSheet.create({
       color: "#FFFFFF",
       fontFamily: "Inter_400Regular_Italic",
         fontSize: 16,
+        width: "90%",
     },
 
     areaBotao: {
