@@ -15,9 +15,11 @@ import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Botao from "../components/Botao";
+import Carregando from "../components/Carregando";
 
 
 export default function EditarPerfil({ navigation, route }) {
+
 
     const tipoCliente = route?.params?.tipoCliente || "fisico";
 
@@ -941,6 +943,7 @@ function Select({
                 </View>
 
             )}
+
 
         </View>
 

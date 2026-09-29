@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Header({ navigation }) {
 
-    const lidarComSair = () => {
+    const sair = () => {
         if (navigation) {
             navigation.replace("Login");
         }
@@ -13,11 +13,13 @@ export default function Header({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Image
-                    style={styles.logo}
-                    source={require('../assets/logoMaior.png')}
-                    resizeMode="contain"
-                />
+                <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+                    <Image
+                        style={styles.logo}
+                        source={require('../assets/logoMaior.png')}
+                        resizeMode="contain"
+                    />
+                </TouchableOpacity>
 
                 <View style={styles.acoesDireita}>
 
@@ -31,7 +33,7 @@ export default function Header({ navigation }) {
 
                     <TouchableOpacity
                         style={styles.botaoSair}
-                        onPress={lidarComSair}
+                        onPress={sair}
                     >
                         <Ionicons
                             name="log-out-outline"

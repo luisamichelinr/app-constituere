@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/iconeApp.png",
         "backgroundColor": "#EEF5FF",
-        "monochromeImage": "./assets/iconeApp.png"
+        "monochromeImage": "./assets/iconeApp.png",
+        "shadow": false
       }
     },
 

@@ -3,8 +3,11 @@ import Header from "../components/Header";
 import CardDashboard from "../components/CardDashboard";
 import CardReuniao from "../components/CardReuniao";
 import CardPagamento from "../components/CardPagamento";
+import Carregando from "../components/Carregando";
+import {useState} from "react";
 
 export default function Dashboard({ navigation }) {
+
     return (
         <View style={styles.container}>
             <Header navigation={navigation} />
@@ -52,6 +55,7 @@ export default function Dashboard({ navigation }) {
                 </View>
 
             </View>
+
         </View>
     )
 }

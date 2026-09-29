@@ -17,7 +17,7 @@ import CampoPerfil from "../components/CampoPerfil";
 
 export default function Perfil({ navigation }) {
 
-    const tipoCliente = "juridico";
+    const tipoCliente = "";
 
     const juridico = tipoCliente === "juridico";
 
