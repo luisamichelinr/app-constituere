@@ -8,20 +8,77 @@ import {
     ScrollView,
 } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/Header";
-import Botao from "../components/Botao";
 import CardValores from "../components/CardValores";
 import CardPagamento from "../components/CardPagamento";
+
 
 export default function PagamentoAberto({ navigation }) {
 
     const [filtro, setFiltro] = useState("aberto");
 
+
+    const resumoPagamentos = [
+        {
+            id: 1,
+            titulo: "Vencido",
+            valor: "700,00"
+        },
+        {
+            id: 2,
+            titulo: "Em aberto",
+            valor: "1.000,00"
+        },
+        {
+            id: 3,
+            titulo: "Pago",
+            valor: "200,00"
+        }
+    ];
+
+
+    const pagamentos = [
+        {
+            id: 1,
+            titulo: "Honorário",
+            valor: "800,00",
+            status: "vencido",
+            data: "01/09/2026"
+        },
+        {
+            id: 2,
+            titulo: "Pró-labore",
+            valor: "300,00",
+            status: "aberto",
+            data: "01/10/2026"
+        },
+        {
+            id: 3,
+            titulo: "Entrada",
+            valor: "1.000,00",
+            status: "pago",
+            data: "01/07/2026"
+        }
+    ];
+
+
+    const pagamentosFiltrados = pagamentos.filter((item) => {
+
+        if (filtro === "pagos") {
+            return item.status === "pago";
+        }
+
+        return item.status === filtro;
+
+    });
+
+
     return (
+
         <View style={styles.container}>
 
             <Header navigation={navigation} />
+
 
             <ScrollView
                 style={styles.scroll}
@@ -29,7 +86,10 @@ export default function PagamentoAberto({ navigation }) {
                 showsVerticalScrollIndicator={false}
             >
 
+
+
                 <View>
+
                     <Text style={styles.titulo}>
                         Pagamentos
                     </Text>
@@ -37,100 +97,151 @@ export default function PagamentoAberto({ navigation }) {
                     <Text style={styles.subtitulo}>
                         Acompanhe seus pagamentos e cobranças
                     </Text>
+
                 </View>
 
 
-                <ScrollView horizontal={true} contentContainerStyle={styles.resumo}>
-                    <CardValores valor={"700,00"} titulo={"Vencido"} />
-                    <CardValores valor={"1.000,00"} titulo={"Em aberto"} />
-                    <CardValores valor={"200,00"} titulo={"Pago"} />
+                <ScrollView
+                    horizontal={true}
+                    contentContainerStyle={styles.resumo}
+                    showsHorizontalScrollIndicator={false}
+                >
 
+                    {resumoPagamentos.map((item) => (
+
+                        <CardValores
+                            key={item.id}
+                            valor={item.valor}
+                            titulo={item.titulo}
+                        />
+
+                    ))}
 
                 </ScrollView>
 
 
+
+
                 <View style={styles.abas}>
+
+
 
                     <TouchableOpacity
                         style={styles.aba}
-                        onPress={() => setFiltro("vencido")}
+                        onPress={() =>
+                            setFiltro("vencido")
+                        }
                     >
+
                         <Text
                             style={[
                                 styles.textoAba,
-                                filtro === "vencido" && styles.abaAtiva
+
+                                filtro === "vencido" &&
+                                styles.abaAtiva
                             ]}
                         >
                             Vencido
                         </Text>
 
+
                         {filtro === "vencido" && (
+
                             <View style={styles.linhaAtiva} />
+
                         )}
+
                     </TouchableOpacity>
+
+
 
 
                     <TouchableOpacity
                         style={styles.aba}
-                        onPress={() => setFiltro("aberto")}
+                        onPress={() =>
+                            setFiltro("aberto")
+                        }
                     >
+
                         <Text
                             style={[
                                 styles.textoAba,
-                                filtro === "aberto" && styles.abaAtiva
+
+                                filtro === "aberto" &&
+                                styles.abaAtiva
                             ]}
                         >
                             A Vencer
                         </Text>
 
+
                         {filtro === "aberto" && (
+
                             <View style={styles.linhaAtiva} />
+
                         )}
+
                     </TouchableOpacity>
+
+
 
 
                     <TouchableOpacity
                         style={styles.aba}
-                        onPress={() => setFiltro("pagos")}
+                        onPress={() =>
+                            setFiltro("pagos")
+                        }
                     >
+
                         <Text
                             style={[
                                 styles.textoAba,
-                                filtro === "pagos" && styles.abaAtiva
+
+                                filtro === "pagos" &&
+                                styles.abaAtiva
                             ]}
                         >
                             Pagos
                         </Text>
 
+
                         {filtro === "pagos" && (
+
                             <View style={styles.linhaAtiva} />
+
                         )}
+
                     </TouchableOpacity>
 
                 </View>
 
 
-                {filtro === "vencido" && (
-                    <CardPagamento titulo={"Honorário"} valor={"800,00"} status={"vencido"} data={"01/09/2026"}/>
-                )}
 
+                <View style={styles.listaPagamentos}>
 
-                {filtro === "aberto" && (
-                    <CardPagamento titulo={"Pró-labore"} valor={"300,00"} status={"aberto"} data={"01/10/2026"}/>
+                    {pagamentosFiltrados.map((item) => (
 
-                )}
+                        <CardPagamento
+                            key={item.id}
+                            titulo={item.titulo}
+                            valor={item.valor}
+                            status={item.status}
+                            data={item.data}
+                            navigation={navigation}
+                        />
 
+                    ))}
 
-                {filtro === "pagos" && (
-                    <CardPagamento titulo={"Entrada"} valor={"1.000,00"} status={"pago"} data={"01/07/2026"}/>
+                </View>
 
-                )}
 
             </ScrollView>
 
         </View>
+
     );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -141,7 +252,7 @@ const styles = StyleSheet.create({
 
     scroll: {
         flex: 1,
-        width: '100%',
+        width: "100%",
     },
 
     main: {
@@ -167,6 +278,7 @@ const styles = StyleSheet.create({
     },
 
 
+
     resumo: {
         flexDirection: "row",
         alignItems: "center",
@@ -178,6 +290,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
     },
+
 
 
     abas: {
@@ -211,6 +324,13 @@ const styles = StyleSheet.create({
         height: 3,
         backgroundColor: "#0047AB",
         borderRadius: 3,
+    },
+
+
+
+    listaPagamentos: {
+        width: "100%",
+        gap: 12,
     },
 
 

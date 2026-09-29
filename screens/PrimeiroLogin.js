@@ -20,7 +20,7 @@ export default function PrimeiroLogin({ navigation }) {
     const entrar = () => {
         console.log("Senha:", senha);
 
-        navigation.navigate("Dashboard");
+        navigation.navigate("Principal");
 
     };
 

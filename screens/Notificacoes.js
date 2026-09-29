@@ -217,6 +217,7 @@ export default function Notificacoes({ navigation }) {
                         )
                         .map((item) => (
                             <Notificacao
+                                key={item.id}
                                 id={item.id}
                                 titulo={item.titulo}
                                 mensagem={item.mensagem}

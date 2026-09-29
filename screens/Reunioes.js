@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     View,
@@ -21,21 +21,110 @@ export default function Reunioes({ navigation }) {
 
     const [reuniaoSelecionada, setReuniaoSelecionada] = useState(null);
 
+    const [confirmarCancelamento, setConfirmarCancelamento] = useState(false);
+
+
+
+    const reunioes = [
+
+        {
+            id: 1,
+            titulo: "Andamento do Processo",
+            dia: "03/08/2026 (Segunda-feira)",
+            horario: "14:30",
+            local: "Escritório",
+            status: "Confirmada"
+        },
+
+        {
+            id: 2,
+            titulo: "Reunião com advogado",
+            dia: "03/08/2026 (Segunda-feira)",
+            horario: "14:30",
+            local: "Escritório",
+            status: "A confirmar"
+        },
+
+        {
+            id: 3,
+            titulo: "Consulta Inicial",
+            dia: "03/08/2026 (Segunda-feira)",
+            horario: "14:30",
+            local: "Escritório",
+            status: "Realizada"
+        }
+
+    ];
+
+
+
+
+    const reunioesFiltradas = reunioes.filter((item) => {
+
+        if (filtro === "proximas") {
+
+            return item.status === "Confirmada";
+
+        }
+
+        if (filtro === "aConfirmar") {
+
+            return item.status === "A confirmar";
+
+        }
+
+        if (filtro === "realizadas") {
+
+            return item.status === "Realizada";
+
+        }
+
+    });
+
+
+
+
     useEffect(() => {
 
-        const fecharOpcoes = navigation.addListener("blur", () => {
-            setReuniaoSelecionada(null);
-        });
+        const fecharOpcoes = navigation.addListener(
+            "blur",
+            () => {
+
+                setReuniaoSelecionada(null);
+
+                setConfirmarCancelamento(false);
+
+            }
+        );
+
 
         return fecharOpcoes;
 
     }, [navigation]);
 
 
+
+
     function editarReuniao() {
 
-        navigation.navigate("ReagendarReuniao")
+        navigation.navigate(
+            "ReagendarReuniao",
+            {
+                reuniao: reuniaoSelecionada
+            }
+        );
+
     }
+
+
+
+
+    function abrirCancelamento() {
+
+        setConfirmarCancelamento(true);
+
+    }
+
 
 
     function cancelarReuniao() {
@@ -45,12 +134,17 @@ export default function Reunioes({ navigation }) {
             reuniaoSelecionada
         );
 
+
+        setConfirmarCancelamento(false);
+
         setReuniaoSelecionada(null);
 
     }
 
 
+
     return (
+
         <View style={styles.container}>
 
             <Header navigation={navigation} />
@@ -76,15 +170,20 @@ export default function Reunioes({ navigation }) {
                 </View>
 
 
+
                 <Botao
                     texto={"Agendar reunião"}
                     acao={() =>
-                        navigation.navigate("AgendarReuniao")
+                        navigation.navigate(
+                            "AgendarReuniao"
+                        )
                     }
                 />
 
 
                 <View style={styles.abas}>
+
+
 
                     <TouchableOpacity
                         style={styles.aba}
@@ -96,6 +195,7 @@ export default function Reunioes({ navigation }) {
                         <Text
                             style={[
                                 styles.textoAba,
+
                                 filtro === "proximas" &&
                                 styles.abaAtiva
                             ]}
@@ -106,11 +206,15 @@ export default function Reunioes({ navigation }) {
 
                         {filtro === "proximas" && (
 
-                            <View style={styles.linhaAtiva} />
+                            <View
+                                style={styles.linhaAtiva}
+                            />
 
                         )}
 
                     </TouchableOpacity>
+
+
 
 
                     <TouchableOpacity
@@ -123,6 +227,7 @@ export default function Reunioes({ navigation }) {
                         <Text
                             style={[
                                 styles.textoAba,
+
                                 filtro === "aConfirmar" &&
                                 styles.abaAtiva
                             ]}
@@ -133,11 +238,15 @@ export default function Reunioes({ navigation }) {
 
                         {filtro === "aConfirmar" && (
 
-                            <View style={styles.linhaAtiva} />
+                            <View
+                                style={styles.linhaAtiva}
+                            />
 
                         )}
 
                     </TouchableOpacity>
+
+
 
 
                     <TouchableOpacity
@@ -150,6 +259,7 @@ export default function Reunioes({ navigation }) {
                         <Text
                             style={[
                                 styles.textoAba,
+
                                 filtro === "realizadas" &&
                                 styles.abaAtiva
                             ]}
@@ -160,7 +270,9 @@ export default function Reunioes({ navigation }) {
 
                         {filtro === "realizadas" && (
 
-                            <View style={styles.linhaAtiva} />
+                            <View
+                                style={styles.linhaAtiva}
+                            />
 
                         )}
 
@@ -169,119 +281,241 @@ export default function Reunioes({ navigation }) {
                 </View>
 
 
-                {filtro === "proximas" && (
 
-                    <View style={styles.listaReunioes}>
+
+                <View style={styles.listaReunioes}>
+
+                    {reunioesFiltradas.map((item) => (
 
                         <CardReuniao
-                            titulo={"Andamento do Processo"}
-                            dia={"03/08/2026 (Segunda-feira)"}
-                            horario={"14:30"}
-                            local={"Escritório"}
-                            status={"Confirmada"}
-                            acao={() =>
-                                setReuniaoSelecionada({
-                                    id: 1,
-                                    titulo: "Andamento do Processo",
-                                    dia: "03/08/2026 (Segunda-feira)",
-                                    horario: "14:30",
-                                    local: "Escritório",
-                                    status: "Confirmada"
-                                })
+                            key={item.id}
+                            titulo={item.titulo}
+                            dia={item.dia}
+                            horario={item.horario}
+                            local={item.local}
+                            status={item.status}
+
+                            acao={
+                                item.status !== "Realizada"
+
+                                    ? () =>
+                                        setReuniaoSelecionada(item)
+
+                                    : undefined
                             }
                         />
 
-                    </View>
+                    ))}
 
-                )}
+                </View>
 
-
-                {filtro === "aConfirmar" && (
-
-                    <View style={styles.listaReunioes}>
-
-                        <CardReuniao
-                            titulo={"Reunião com advogado"}
-                            dia={"03/08/2026 (Segunda-feira)"}
-                            horario={"14:30"}
-                            local={"Escritório"}
-                            status={"A confirmar"}
-                            acao={() =>
-                                setReuniaoSelecionada({
-                                    id: 2,
-                                    titulo: "Reunião com advogado",
-                                    dia: "03/08/2026 (Segunda-feira)",
-                                    horario: "14:30",
-                                    local: "Escritório",
-                                    status: "A confirmar"
-                                })
-                            }
-                        />
-
-                    </View>
-
-                )}
-
-
-                {filtro === "realizadas" && (
-
-                    <View style={styles.listaReunioes}>
-
-                        <CardReuniao
-                            titulo={"Consulta Inicial"}
-                            dia={"03/08/2026 (Segunda-feira)"}
-                            horario={"14:30"}
-                            local={"Escritório"}
-                            status={"Realizada"}
-                        />
-
-                    </View>
-
-                )}
 
             </ScrollView>
 
 
+            {reuniaoSelecionada !== null &&
+                !confirmarCancelamento && (
 
-            {reuniaoSelecionada !== null && (
-
-                <View style={styles.overlay}>
-
-                    <TouchableOpacity
-                        style={styles.fundoOverlay}
-                        activeOpacity={1}
-                        onPress={() =>
-                            setReuniaoSelecionada(null)
-                        }
-                    />
+                    <View style={styles.overlay}>
 
 
-                    <View style={styles.opcoesReuniao}>
+                        <TouchableOpacity
+                            style={styles.fundoOverlay}
+                            activeOpacity={1}
+                            onPress={() =>
+                                setReuniaoSelecionada(null)
+                            }
+                        />
+
+
+                        <View style={styles.opcoesReuniao}>
 
 
 
-                        <View style={styles.topoOpcoes}>
+                            <View style={styles.topoOpcoes}>
 
-                            <View>
 
-                                <Text style={styles.tituloOpcoes}>
-                                    Gerenciar reunião
-                                </Text>
+                                <View>
 
-                                <Text style={styles.subtituloOpcoes}>
-                                    {reuniaoSelecionada.titulo}
-                                </Text>
+                                    <Text style={styles.tituloOpcoes}>
+                                        Gerenciar reunião
+                                    </Text>
+
+                                    <Text style={styles.subtituloOpcoes}>
+                                        {reuniaoSelecionada.titulo}
+                                    </Text>
+
+                                </View>
+
+
+                                <TouchableOpacity
+                                    style={styles.fechar}
+                                    onPress={() =>
+                                        setReuniaoSelecionada(null)
+                                    }
+                                >
+
+                                    <Ionicons
+                                        name="close-outline"
+                                        size={25}
+                                        color="#444444"
+                                    />
+
+                                </TouchableOpacity>
 
                             </View>
 
 
+
+
+                            <View style={styles.resumoReuniao}>
+
+
+                                <View style={styles.infoResumo}>
+
+                                    <Ionicons
+                                        name="calendar-outline"
+                                        size={19}
+                                        color="#0047AB"
+                                    />
+
+                                    <Text style={styles.textoResumo}>
+                                        {reuniaoSelecionada.dia}
+                                    </Text>
+
+                                </View>
+
+
+                                <View style={styles.infoResumo}>
+
+                                    <Ionicons
+                                        name="time-outline"
+                                        size={19}
+                                        color="#0047AB"
+                                    />
+
+                                    <Text style={styles.textoResumo}>
+                                        {reuniaoSelecionada.horario}
+                                    </Text>
+
+                                </View>
+
+
+                                <View style={styles.infoResumo}>
+
+                                    <Ionicons
+                                        name="location-outline"
+                                        size={19}
+                                        color="#0047AB"
+                                    />
+
+                                    <Text style={styles.textoResumo}>
+                                        {reuniaoSelecionada.local}
+                                    </Text>
+
+                                </View>
+
+                            </View>
+
+
+
+
                             <TouchableOpacity
-                                style={styles.fechar}
-                                onPress={() =>
-                                    setReuniaoSelecionada(null)
-                                }
+                                style={styles.opcaoEditar}
+                                onPress={editarReuniao}
                             >
 
+                                <View style={styles.iconeEditar}>
+
+                                    <Ionicons
+                                        name="create-outline"
+                                        size={22}
+                                        color="#0047AB"
+                                    />
+
+                                </View>
+
+
+                                <View style={styles.textosOpcao}>
+
+                                    <Text style={styles.tituloEditar}>
+                                        Editar reunião
+                                    </Text>
+
+                                    <Text style={styles.descricaoOpcao}>
+                                        Altere a data, horário ou informações
+                                    </Text>
+
+                                </View>
+
+
+                                <Ionicons
+                                    name="chevron-forward-outline"
+                                    size={20}
+                                    color="#999999"
+                                />
+
+                            </TouchableOpacity>
+
+
+
+
+                            <TouchableOpacity
+                                style={styles.opcaoCancelar}
+                                onPress={abrirCancelamento}
+                            >
+
+                                <View style={styles.iconeCancelar}>
+
+                                    <Ionicons
+                                        name="close-circle-outline"
+                                        size={22}
+                                        color="#FF4D55"
+                                    />
+
+                                </View>
+
+
+                                <View style={styles.textosOpcao}>
+
+                                    <Text style={styles.tituloCancelar}>
+                                        Cancelar reunião
+                                    </Text>
+
+                                    <Text style={styles.descricaoOpcao}>
+                                        Cancele este agendamento
+                                    </Text>
+
+                                </View>
+
+                            </TouchableOpacity>
+
+
+                        </View>
+
+                    </View>
+
+                )}
+
+
+            {confirmarCancelamento &&
+                reuniaoSelecionada !== null && (
+
+                    <View style={styles.overlayConfirmacao}>
+
+
+                        <View
+                            style={styles.fundoConfirmacao}
+                        />
+
+
+                        <View style={styles.cardConfirmacao}>
+                            <View style={styles.topoCancelar}>
+
+                            <TouchableOpacity style={styles.fechar} onPress={() => {
+                                setReuniaoSelecionada(null);
+                                setConfirmarCancelamento(false);
+                            }}>
                                 <Ionicons
                                     name="close-outline"
                                     size={25}
@@ -289,120 +523,88 @@ export default function Reunioes({ navigation }) {
                                 />
 
                             </TouchableOpacity>
+                                <View style={styles.iconeConfirmacao}>
+
+                                    <Ionicons
+                                        name="alert-circle-outline"
+                                        size={35}
+                                        color="#FF4D55"
+                                    />
+
+                                </View>
+
+                            </View>
+
+
+
+
+
+
+
+                            <Text style={styles.tituloConfirmacao}>
+                                Cancelar reunião?
+                            </Text>
+
+
+                            <Text style={styles.textoConfirmacao}>
+
+                                Tem certeza de que deseja cancelar a reunião
+
+                                <Text style={styles.nomeReuniaoConfirmacao}>
+                                    {" "}
+                                    {reuniaoSelecionada.titulo}
+                                </Text>
+
+                                ?
+
+                            </Text>
+
+
+
+                            <View style={styles.botoesConfirmacao}>
+
+
+                                <TouchableOpacity
+                                    style={styles.botaoVoltar}
+                                    onPress={() =>
+                                        setConfirmarCancelamento(false)
+                                    }
+                                >
+
+                                    <Text style={styles.textoVoltar}>
+                                        Voltar
+                                    </Text>
+
+                                </TouchableOpacity>
+
+
+
+                                <TouchableOpacity
+                                    style={styles.botaoCancelar}
+                                    onPress={cancelarReuniao}
+                                >
+
+                                    <Text style={styles.textoBotaoCancelar}>
+                                        Sim, cancelar
+                                    </Text>
+
+                                </TouchableOpacity>
+
+
+                            </View>
+
 
                         </View>
-
-
-                        <View style={styles.resumoReuniao}>
-
-                            <View style={styles.infoResumo}>
-
-                                <Ionicons
-                                    name="calendar-outline"
-                                    size={19}
-                                    color="#0047AB"
-                                />
-
-                                <Text style={styles.textoResumo}>
-                                    {reuniaoSelecionada.dia}
-                                </Text>
-
-                            </View>
-
-
-                            <View style={styles.infoResumo}>
-
-                                <Ionicons
-                                    name="time-outline"
-                                    size={19}
-                                    color="#0047AB"
-                                />
-
-                                <Text style={styles.textoResumo}>
-                                    {reuniaoSelecionada.horario}
-                                </Text>
-
-                            </View>
-
-                        </View>
-
-
-                        <TouchableOpacity
-                            style={styles.opcaoEditar}
-                            onPress={editarReuniao}
-                        >
-
-                            <View style={styles.iconeEditar}>
-
-                                <Ionicons
-                                    name="create-outline"
-                                    size={22}
-                                    color="#0047AB"
-                                />
-
-                            </View>
-
-
-                            <View style={styles.textosOpcao}>
-
-                                <Text style={styles.tituloEditar}>
-                                    Editar reunião
-                                </Text>
-
-                                <Text style={styles.descricaoOpcao}>
-                                    Altere a data, horário ou informações
-                                </Text>
-
-                            </View>
-
-
-                            <Ionicons
-                                name="chevron-forward-outline"
-                                size={20}
-                                color="#999999"
-                            />
-
-                        </TouchableOpacity>
-
-
-                        <TouchableOpacity
-                            style={styles.opcaoCancelar}
-                            onPress={cancelarReuniao}
-                        >
-
-                            <View style={styles.iconeCancelar}>
-
-                                <Ionicons
-                                    name="close-circle-outline"
-                                    size={22}
-                                    color="#FF4D55"
-                                />
-
-                            </View>
-
-
-                            <View style={styles.textosOpcao}>
-
-                                <Text style={styles.tituloCancelar}>
-                                    Cancelar reunião
-                                </Text>
-
-                                <Text style={styles.descricaoOpcao}>
-                                    Cancele este agendamento
-                                </Text>
-
-                            </View>
-
-                        </TouchableOpacity>
 
                     </View>
 
-                </View>
+                )}
 
-            )}
 
         </View>
+
     );
+
 }
 
 
@@ -413,9 +615,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
+
     scroll: {
         flex: 1,
     },
+
 
     main: {
         paddingVertical: 20,
@@ -432,13 +636,13 @@ const styles = StyleSheet.create({
         color: "#000000",
     },
 
+
     subtitulo: {
         fontSize: 14,
         fontFamily: "Inter_400Regular",
         color: "#666666",
         marginTop: 3,
     },
-
 
 
     abas: {
@@ -450,6 +654,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#E2E2E2",
     },
 
+
     aba: {
         flex: 1,
 
@@ -460,15 +665,18 @@ const styles = StyleSheet.create({
         position: "relative",
     },
 
+
     textoAba: {
         fontSize: 15,
         fontFamily: "Inter_700Bold",
         color: "#999999",
     },
 
+
     abaAtiva: {
         color: "#0047AB",
     },
+
 
     linhaAtiva: {
         position: "absolute",
@@ -482,7 +690,6 @@ const styles = StyleSheet.create({
 
         borderRadius: 3,
     },
-
 
 
     listaReunioes: {
@@ -503,7 +710,6 @@ const styles = StyleSheet.create({
 
         zIndex: 100,
         elevation: 100,
-
     },
 
 
@@ -528,10 +734,9 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
 
         paddingHorizontal: 25,
-        paddingTop: 12,
+        paddingTop: 20,
         paddingBottom: 120,
     },
-
 
 
     topoOpcoes: {
@@ -544,11 +749,13 @@ const styles = StyleSheet.create({
         marginBottom: 18,
     },
 
+
     tituloOpcoes: {
         fontSize: 20,
         fontFamily: "Inter_800ExtraBold",
         color: "#222222",
     },
+
 
     subtituloOpcoes: {
         fontSize: 13,
@@ -557,6 +764,7 @@ const styles = StyleSheet.create({
 
         marginTop: 3,
     },
+
 
     fechar: {
         width: 35,
@@ -569,7 +777,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-
 
 
     resumoReuniao: {
@@ -586,12 +793,14 @@ const styles = StyleSheet.create({
         gap: 8,
     },
 
+
     infoResumo: {
         flexDirection: "row",
         alignItems: "center",
 
         gap: 8,
     },
+
 
     textoResumo: {
         fontSize: 13,
@@ -614,6 +823,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#EEEEEE",
     },
 
+
     iconeEditar: {
         width: 42,
         height: 42,
@@ -627,6 +837,7 @@ const styles = StyleSheet.create({
 
         marginRight: 12,
     },
+
 
     tituloEditar: {
         fontSize: 14,
@@ -646,6 +857,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
 
+
     iconeCancelar: {
         width: 42,
         height: 42,
@@ -660,6 +872,7 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
 
+
     tituloCancelar: {
         fontSize: 14,
         fontFamily: "Inter_700Bold",
@@ -671,6 +884,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 
+
     descricaoOpcao: {
         fontSize: 12,
         fontFamily: "Inter_400Regular",
@@ -678,5 +892,183 @@ const styles = StyleSheet.create({
 
         marginTop: 3,
     },
+
+
+    overlayConfirmacao: {
+        position: "absolute",
+
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+
+        alignItems: "center",
+        justifyContent: "center",
+
+        zIndex: 200,
+        elevation: 200,
+
+        paddingHorizontal: 30,
+    },
+
+
+    fundoConfirmacao: {
+        position: "absolute",
+
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+
+        backgroundColor: "rgba(0, 0, 0, 0.45)",
+    },
+
+
+    cardConfirmacao: {
+        width: "100%",
+
+        backgroundColor: "#FFFFFF",
+
+        borderRadius: 15,
+
+        padding: 22,
+
+        alignItems: "center",
+
+        elevation: 8,
+
+        shadowColor: "#000000",
+        shadowOpacity: 0.15,
+        shadowRadius: 10,
+
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+    },
+
+
+    iconeConfirmacao: {
+        width: 65,
+        height: 65,
+
+        borderRadius: 33,
+
+        backgroundColor: "#FFE9EA",
+
+        alignItems: "center",
+        justifyContent: "center",
+
+        marginBottom: 15,
+    },
+
+
+    tituloConfirmacao: {
+        fontSize: 20,
+
+        fontFamily: "Inter_800ExtraBold",
+
+        color: "#222222",
+
+        textAlign: "center",
+    },
+
+
+    textoConfirmacao: {
+        fontSize: 14,
+
+        lineHeight: 20,
+
+        fontFamily: "Inter_400Regular",
+
+        color: "#666666",
+
+        textAlign: "center",
+
+        marginTop: 8,
+        marginBottom: 16
+    },
+
+
+    nomeReuniaoConfirmacao: {
+        fontFamily: "Inter_700Bold",
+        color: "#333333",
+    },
+
+
+    avisoConfirmacao: {
+        fontSize: 12,
+
+        fontFamily: "Inter_400Regular",
+
+        color: "#999999",
+
+        textAlign: "center",
+
+        marginTop: 6,
+        marginBottom: 20,
+    },
+
+
+    botoesConfirmacao: {
+        width: "100%",
+
+        flexDirection: "row",
+
+        justifyContent: "space-evenly",
+        marginTop: 5
+    },
+
+
+    botaoVoltar: {
+        width: 150,
+
+
+        borderWidth: 1,
+        borderColor: "#0047AB",
+
+        paddingVertical: 10,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        backgroundColor: "#FFFFFF",
+    },
+
+
+    textoVoltar: {
+        fontSize: 13,
+
+        fontFamily: "Inter_700Bold",
+
+        color: "#0047AB",
+    },
+
+
+    botaoCancelar: {
+        paddingVertical: 10,
+        width: 150,
+
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        backgroundColor: "#FF4D55",
+    },
+
+
+    textoBotaoCancelar: {
+        fontSize: 13,
+
+        fontFamily: "Inter_700Bold",
+
+        color: "#FFFFFF",
+    },
+
+    topoCancelar: {
+        width: "100%",
+        flexDirection: "row",
+        gap: 93
+    }
 
 });

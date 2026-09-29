@@ -72,7 +72,7 @@ export default function Processos({ navigation }) {
                     {processos.map((item) => (
 
                         <CardProcesso
-                            id={item.id}
+                            key={item.id}
                             status={item.status}
                              numero={item.numero}
                              advogados={item.advogados}

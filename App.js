@@ -27,6 +27,7 @@ import ReagendarReuniao from "./screens/ReagendarReuniao";
 import Perfil from "./screens/Perfil";
 import PrimeiroLogin from "./screens/PrimeiroLogin";
 import EditarPerfil from "./screens/EditarPerfil";
+import RealizarPagamento from "./screens/RealizarPagamento";
 
 
 const Stack = createNativeStackNavigator();
@@ -201,13 +202,14 @@ export default function App() {
             <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
                 <Stack.Screen name="Home" component={Home} />
                 <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Dashboard" component={HomeTabs} />
+                <Stack.Screen name="Principal" component={HomeTabs} />
                 <Stack.Screen name="PrimeiroLogin" component={PrimeiroLogin} />
                 <Stack.Screen name="RedefinirSenha" component={RedefinirSenha} />
                 <Stack.Screen name="AgendarReuniao" component={AgendarReuniao}/>
                 <Stack.Screen name="ReagendarReuniao" component={ReagendarReuniao}/>
                 <Stack.Screen name="Notificacoes" component={Notificacoes} />
                 <Stack.Screen name="EditarPerfil" component={EditarPerfil} />
+                <Stack.Screen name="RealizarPagamento" component={RealizarPagamento}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

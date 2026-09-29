@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import Header from "../components/Header";
 import CardDashboard from "../components/CardDashboard";
 import CardReuniao from "../components/CardReuniao";
@@ -47,6 +47,7 @@ export default function Dashboard({ navigation }) {
                         valor={"R$ 1.000,00"}
                         data={"02/10/2026"}
                         acao={() => navigation.navigate("Pagamentos")}
+                        navigation={navigation}
                     />
                 </View>
 
